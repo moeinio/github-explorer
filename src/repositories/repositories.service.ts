@@ -59,7 +59,7 @@ export class RepositoriesService {
     language?: string,
   ): Promise<RepositoryEntity[]> {
     const date = new Date();
-    // get last week's date as a the default value
+    // get last week's date as the default value
     date.setDate(date.getDate() - 7);
 
     const lastWeek = date.toISOString().split('T')[0];

@@ -95,6 +95,15 @@ export class RepositoriesService {
   async starRepository(
     repository: RepositoryEntity,
   ): Promise<RepositoryEntity> {
+    const existingRepository = await this.repositoriesRepo.findOne({
+      where: { id: repository.id },
+    });
+    if (existingRepository) {
+      throw new HttpException(
+        `Repository with ID ${repository.id} already exists`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     return this.repositoriesRepo.save(repository);
   }
 

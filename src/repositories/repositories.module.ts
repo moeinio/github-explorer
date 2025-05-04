@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { RepositoriesService } from './repositories.service';
-import { RepositoriesController } from './repositories.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { RepositoryEntity } from './repository.entity';
+import { Module } from "@nestjs/common";
+import { RepositoriesService } from "./repositories.service";
+import { RepositoriesController } from "./repositories.controller";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { RepositoryEntity } from "./repository.entity";
 
 @Module({
   imports: [TypeOrmModule.forFeature([RepositoryEntity])],

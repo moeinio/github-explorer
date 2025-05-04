@@ -3,11 +3,11 @@ import {
   HttpException,
   HttpStatus,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { RepositoryEntity } from './repository.entity';
-import { Repository } from 'typeorm';
-import { GitHubApiResponse, GithubRepository } from './types';
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { RepositoryEntity } from "./repository.entity";
+import { Repository } from "typeorm";
+import { GitHubApiResponse, GithubRepository } from "./types";
 
 @Injectable()
 export class RepositoriesService {
@@ -19,9 +19,9 @@ export class RepositoriesService {
   private isGitHubApiResponse(data: unknown): data is GitHubApiResponse {
     // Typeguard ensures that the data returned from the GitHub API is in the expected format.
     return (
-      typeof data === 'object' &&
+      typeof data === "object" &&
       data !== null &&
-      'items' in data &&
+      "items" in data &&
       Array.isArray((data as GitHubApiResponse).items)
     );
   }
@@ -41,7 +41,7 @@ export class RepositoriesService {
       const data: unknown = await response.json();
       if (!this.isGitHubApiResponse(data)) {
         throw new HttpException(
-          'Failed to fetch repositories',
+          "Failed to fetch repositories",
           HttpStatus.BAD_REQUEST,
         );
       }
@@ -62,7 +62,7 @@ export class RepositoriesService {
     // get last week's date as the default value
     date.setDate(date.getDate() - 7);
 
-    const lastWeek = date.toISOString().split('T')[0];
+    const lastWeek = date.toISOString().split("T")[0];
 
     const dateFilter = startingDate
       ? `created:>${startingDate}`
@@ -111,8 +111,8 @@ export class RepositoriesService {
     // @todo use find() instead of queryBuilder
     if (language) {
       const filteredRepositories = await this.repositoriesRepo
-        .createQueryBuilder('repository')
-        .where('repository.language = :language', {
+        .createQueryBuilder("repository")
+        .where("repository.language = :language", {
           language: `${encodeURIComponent(language)}`,
         })
         .getMany();

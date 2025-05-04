@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { RepositoriesService } from './repositories.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { RepositoriesService } from "./repositories.service";
 
-describe('RepositoriesService', () => {
+describe("RepositoriesService", () => {
   let service: RepositoriesService;
 
   beforeEach(async () => {
@@ -12,10 +12,10 @@ describe('RepositoriesService', () => {
     service = module.get<RepositoriesService>(RepositoriesService);
   });
 
-  it('should fetch trending repositories', async () => {
+  it("should fetch trending repositories", async () => {
     const repositories = await service.getPopularRepositories(
-      '2025-03-10',
-      'javascript',
+      "2025-03-10",
+      "javascript",
     );
     expect(repositories).toBeDefined();
     expect(Array.isArray(repositories)).toBeTruthy();
